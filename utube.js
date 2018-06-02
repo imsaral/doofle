@@ -1,5 +1,5 @@
 var uObj
-var ustr="ronaldo"
+var ustr="google+maps+api+javascript"
 function ureqListener(){
   //console.log('herev also')
   console.log(this.responseText)
