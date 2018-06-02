@@ -1,13 +1,46 @@
-var qwe
-var str = "how to use google maps api";
+var str = "";
 var oReq;
 var index = 0,
   index2 = 0;
-var answerIds = [];
+var answer = [];
 var questionIds = [];
 var questions = [];
 var keywords = [];
 var keySearch = "";
+var qids = "";
+var inp = document.getElementById("qw");
+inp.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    document.getElementById("but").click();
+  }
+});
+function search() {
+  str = document.getElementById("qw").value;
+  console.log(str);
+  oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open(
+    "POST",
+    `https://apis.paralleldots.com/v3/keywords?api_key=c3QDGriQp9S4DXDVWDqf7wvqazd0B5xHWWCQfEfgCc4&text=${str}`
+  );
+  oReq.send();
+}
+function reqListener() {
+  var obj = JSON.parse(this.responseText);
+  console.log(obj);
+  let i;
+  for (i in obj.keywords) {
+    keywords[i] = obj.keywords[i].keyword;
+    keySearch = "[" + keywords[i].replace(/ /g, "-") + "];";
+  }
+  oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener1);
+  oReq.open(
+    "GET",
+    `https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&q=${str}&site=stackoverflow`
+  );
+  oReq.send();
+}
 function reqListener1() {
   var obj = JSON.parse(this.responseText);
   console.log(obj);
@@ -18,21 +51,18 @@ function reqListener1() {
       questionIds[index2] = obj.items[i].question_id;
       questions[index2] = obj.items[i].title;
       console.log(questions[index2]);
-      //answerIds[j++] = obj.items[i].accepted_answer_id;
-      var oReq1 = new XMLHttpRequest();
-      oReq1.addEventListener("load", reqListener2);
-      oReq1.open(
-        "GET",
-        `https://api.stackexchange.com/2.2/questions/${
-          questionIds[index2]
-        }?order=desc&sort=votes&site=stackoverflow&filter=!-y(KwOdKR5Ga7mmruVArx2SJykc-M)3jKiDQBk1fq`
-      );
-      oReq1.send();
       index2++;
     }
   }
+  oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener2);
+  oReq.open(
+    "GET",
+    `https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&q=${keySearch}&site=stackoverflow`
+  );
+  oReq.send();
 }
-function reqListener3() {
+function reqListener2() {
   var obj = JSON.parse(this.responseText);
   console.log(obj);
   let i;
@@ -49,59 +79,47 @@ function reqListener3() {
       questionIds[index2] = obj.items[i].question_id;
       questions[index2] = obj.items[i].title;
       console.log(questions[index2]);
-      //answerIds[j++] = obj.items[i].accepted_answer_id;
-      var oReq1 = new XMLHttpRequest();
-      oReq1.addEventListener("load", reqListener2);
-      oReq1.open(
-        "GET",
-        `https://api.stackexchange.com/2.2/questions/${
-          questionIds[index2]
-        }?order=desc&sort=votes&site=stackoverflow&filter=!-y(KwOdKR5Ga7mmruVArx2SJykc-M)3jKiDQBk1fq`
-      );
-      oReq1.send();
       index2++;
     }
   }
-}
-function reqListener2() {
-  var obj = JSON.parse(this.responseText);
-  //console.log(obj);
-  let i;
-  let qid = obj.items[0].question_id;
-  for (i = 0; i <= index2; i++) {
-    if (questionIds[i] == qid) {
-      answerIds[i] = obj.items[0].answers[0].body;
-      break;
-    }
+  for (i = 0; i < index2; i++) {
+    qids = qids + questionIds[i] + ";";
   }
+  qids = qids.substring(0, qids.length - 1);
+  console.log(qids);
+  var oReq1 = new XMLHttpRequest();
+  oReq1.addEventListener("load", reqListener3);
+  oReq1.open(
+    "GET",
+    `https://api.stackexchange.com/2.2/questions/${qids}?order=desc&sort=votes&site=stackoverflow&filter=!-y(KwOdKR5Ga7mmruVArx2SJykc-M)3jKiDQBk1fq`
+  );
+  oReq1.send();
 }
-function reqListener() {
+function reqListener3() {
   var obj = JSON.parse(this.responseText);
   console.log(obj);
   let i;
-  for (i in obj.keywords) {
-    keywords[i] = obj.keywords[i].keyword;
-    keySearch = "[" + keywords[i].replace(/ /g, "-") + "];";
+  for (i in obj.items) {
+    let quid = obj.items[i].question_id;
+    let j;
+    for (j = 0; j < index2; j++) {
+      if (quid == questionIds[j]) {
+        answer[j] = obj.items[i].answers[0].body;
+        break;
+      }
+    }
   }
-  oReq = new XMLHttpRequest();
-  oReq.addEventListener("load", reqListener3);
-  oReq.open(
-    "GET",
-    `https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&q=${keySearch}&site=stackoverflow`
-  );
-  oReq.send();
+  var parent = document.getElementById("content");
+  for (i = 0; i < index2; i++) {
+    var newDiv = document.createElement("div");
+    var newSpan1 = document.createElement("span");
+    newSpan1.setAttribute("id", "quesTitle");
+    var newSpan2 = document.createElement("span");
+    newSpan2.setAttribute("id", "ansBody");
+    newSpan1.innerHTML = questions[i];
+    newSpan2.innerHTML = answer[i];
+    newDiv.appendChild(newSpan1);
+    newDiv.appendChild(newSpan2);
+    parent.appendChild(newDiv);
+  }
 }
-oReq = new XMLHttpRequest();
-oReq.addEventListener("load", reqListener1);
-oReq.open(
-  "GET",
-  `https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&q=${str}&site=stackoverflow`
-);
-oReq.send();
-oReq = new XMLHttpRequest();
-oReq.addEventListener("load", reqListener);
-oReq.open(
-  "POST",
-  `https://apis.paralleldots.com/v3/keywords?api_key=c3QDGriQp9S4DXDVWDqf7wvqazd0B5xHWWCQfEfgCc4&text=${str}`
-);
-oReq.send();
