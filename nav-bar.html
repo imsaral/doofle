@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>web-app</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="web.css">
+  <style> 
+  input[type=text]:focus {
+    width: 50%;
+  }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+  </div>
+</nav>
+<div>
+    <input id="qw" type="text" class="search-bar" name="search" placeholder="Search your query" onkeypress="handle(event)">
+    
+    </div>
+  <script>
+    function handle(e){
+        if(e.keyCode === 13){
+            e.preventDefault(); 
+            alert("Enter was pressed was presses");
+        }
+    }
+</script>
+</div><br><br><br>
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab"href="#home" >relvance</a></li>
+    <li><a data-toggle="tab" href="#votes">votes</a></li>
+  </ul>  
+</div>
+<div id="content"></div>
+<div id="video"></div>
+
+</body>
+</html>
