@@ -13,6 +13,7 @@ var qids = "";
 var inp = document.getElementById("qw");
 inp.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
+    // document.getElementById("movedown").click();
     document.getElementById("but").click();
   }
 });
@@ -118,17 +119,58 @@ function reqListener3() {
     }
   }
   var parent = document.getElementById("content");
-  for (i = 0; i < index2; i++) {
+  parent.setAttribute("style","display:block")
+  for (i = 0; i < index2-1; i++) {
     var newDiv = document.createElement("div");
-    var newSpan1 = document.createElement("span");
-    newSpan1.setAttribute("id", "quesTitle");
-    var newSpan2 = document.createElement("span");
-    newSpan2.setAttribute("id", "ansBody");
-    newSpan1.innerHTML = questions[i];
-    newSpan2.innerHTML = answer[i];
+    var newSpan1 = document.createElement("div");
+    newSpan1.setAttribute("class", "quesTitle");
+    var newSpan2 = document.createElement("div");
+    newSpan2.setAttribute("class", "ansBody");
+    newSpan1.innerHTML = "Ques. : "+questions[i];
+    newSpan2.innerHTML = "Answer :\n"+answer[i];
     newDiv.appendChild(newSpan1);
+    newDiv.appendChild(document.createElement('br'))
     newDiv.appendChild(newSpan2);
     parent.appendChild(newDiv);
+    parent.appendChild(document.createElement('br'))
+    parent.appendChild(document.createElement('hr'))
+    parent.appendChild(document.createElement('br'))
+  }
+    var newDiv = document.createElement("div");
+    var newSpan1 = document.createElement("div");
+    newSpan1.setAttribute("class", "quesTitle");
+    var newSpan2 = document.createElement("div");
+    newSpan2.setAttribute("class", "ansBody");
+    newSpan1.innerHTML = "Ques. : "+questions[i];
+    newSpan2.innerHTML = "Answer :\n"+answer[i];
+    newDiv.appendChild(newSpan1);
+    newDiv.appendChild(document.createElement('br'));
+    newDiv.appendChild(newSpan2);
+    parent.appendChild(newDiv);
+  let beta=document.getElementById('alpha')
+  beta.setAttribute("style","display:block")
+  let b=document.getElementById('video')
+  b.setAttribute("style","display:block")
+  for(i=0;i<10;i++){
+    let x=uObj.items[i].id.videoId
+  //console.log(Obj.items[0].id.videoId)
+    let d=document.createElement('div')
+    d.setAttribute("class","vidcon")
+    let h=document.createElement('h5')
+    h.setAttribute("class","videotitle")
+    h.innerHTML=uObj.items[i].snippet.title
+    let a=document.createElement('iframe')
+  //a.setAttribute("width","560")
+  //a.setAttribute("height","315")
+    a.setAttribute("class","embedvideo")
+    a.setAttribute("src",`https://www.youtube.com/embed/${x}`)
+    a.setAttribute("frameborder","0")
+    a.setAttribute("allow","autoplay;encrypted-media")
+    a.setAttribute("allowfullscreen","true")
+    d.append(h)
+    d.append(a)
+    b.append(d)
+    b.append(document.createElement('br'))
   }
 }
 
@@ -141,22 +183,5 @@ function ureqListener(){
   //console.log('herev also')
   console.log(this.responseText)
   uObj=JSON.parse(this.responseText)
-  for(i=0;i<10;i++){
-    let x=uObj.items[i].id.videoId
-  //console.log(Obj.items[0].id.videoId)
-    let d=document.createElement('div')
-    let h=document.createElement('h5')
-    h.innerHTML=uObj.items[i].snippet.title
-    let a=document.createElement('iframe')
-  //a.setAttribute("width","560")
-  //a.setAttribute("height","315")
-    a.setAttribute("src",`https://www.youtube.com/embed/${x}`)
-    a.setAttribute("frameborder","0")
-    a.setAttribute("allow","autoplay;encrypted-media")
-    a.setAttribute("allowfullscreen","true")
-    let b=document.getElementById('video')
-    d.append(h)
-    d.append(a)
-    b.append(d)
-  }
+
 }
