@@ -17,20 +17,16 @@
   transition: width 0.4s ease-in-out;
 }
 #video {
-  position: relative;
-  display: table;
   width: 30%;
   float: right;
   border: 1px solid black;
-  height: 700px;
+  height: 600px;
   padding: 0 5% 0 0;
   background: white;
   overflow-y: scroll;
 }
 #content {
-  position: relative;
-  display: table;
-  height: 700px;
+  height: 600px;
   width: 70%;
   float: left;
   border: 1px solid red;
