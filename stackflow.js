@@ -62,12 +62,19 @@ function search() {
       `https://api.edamam.com/search?q=${s}&app_id=07ebeb3d&app_key=0a846267a56826b3ea7b5c98277011e4`
     );
     oReq.send();
-    var str1 = "how+to+cook" + s;
+    var str1 = "how+to+cook+" + s;
     var uoReq = new XMLHttpRequest();
     uoReq.open(
       "GET",
       `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${str1}&maxResults=10&type=video&videoCaption=closedCaption&key=AIzaSyBgRBtfg3im4_6a3XGq3r4UcLJ0bweU6-4`
     );
+    console.log(
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${str1}&maxResults=10&type=video&videoCaption=closedCaption&key=AIzaSyBgRBtfg3im4_6a3XGq3r4UcLJ0bweU6-4`
+    );
+    // uoReq.open(
+    //   "GET",
+    //   `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${str1}&maxResults=10&type=video&key=AIzaSyBgRBtfg3im4_6a3XGq3r4UcLJ0bweU6-4`
+    // );
     var z = uoReq.addEventListener("load", ureqListener);
     uoReq.send();
   }
