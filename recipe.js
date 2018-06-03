@@ -1,4 +1,3 @@
-var str = "dal makhani";
 var oReq = new XMLHttpRequest();
 str = str.replace(/ /g, "+");
 oReq.addEventListener("load", reqListener);
