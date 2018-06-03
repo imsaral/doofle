@@ -36,7 +36,6 @@ inp.addEventListener("keyup", function(event) {
     keywords = [];
     keySearch = "";
     qids = "";
-    // document.getElementById("movedown").click();
     document.getElementById("but").click();
   }
 });
@@ -224,11 +223,10 @@ function reqListener3() {
 }
 function reqListener4() {
   var obj = JSON.parse(this.responseText);
-  console.log(obj);
+  //console.log(obj);
   var parent = document.getElementById("content");
   parent.setAttribute("style", "display:block");
   var newDiv = document.createElement("div");
-
   let i;
   for (i in obj.hits) {
     if (i >= 10) break;
@@ -238,15 +236,18 @@ function reqListener4() {
     var url = document.createElement("a");
     url.setAttribute("href", "" + obj.hits[i].recipe.url);
     url.setAttribute("target", "_blank");
-    url.innerHTML = "View Recipe";
+    url.setAttribute("class", "toview");
+    url.setAttribute("style", "color:blue");
+    url.innerText = "View Recipe";
     var div2 = document.createElement("div");
     div2.setAttribute("class", "image");
     var img = document.createElement("img");
     img.setAttribute("class", "pic");
     img.setAttribute("src", "" + obj.hits[i].recipe.image);
-    console.log(img);
+    //console.log(img);
     var ul = document.createElement("ul");
     head.innerHTML = obj.hits[i].recipe.label;
+    head.setAttribute("class", "quesTitle");
     let j;
     for (j in obj.hits[i].recipe.ingredients) {
       var li = document.createElement("li");
@@ -254,14 +255,21 @@ function reqListener4() {
       //console.log(li);
       ul.appendChild(li);
     }
+    var combinedDiv = document.createElement("div");
+
     div2.appendChild(img);
-    div1.appendChild(head);
+    //div1.appendChild(head);
     div1.appendChild(ul);
     div1.appendChild(url);
-    div1.appendChild(document.createElement("hr"));
-    newDiv.appendChild(div1);
-    newDiv.appendChild(div2);
+    combinedDiv.appendChild(div1);
+    combinedDiv.appendChild(div2);
+    combinedDiv.setAttribute("class", "ansBody");
+    console.log(combinedDiv);
+    newDiv.appendChild(head);
+    newDiv.appendChild(combinedDiv);
     parent.appendChild(newDiv);
+    // parent.appendChild(document.createElement("hr"));
+    // parent.appendChild(document.createElement("br"));
   }
   let beta = document.getElementById("alpha");
   beta.setAttribute("style", "display:block");
@@ -288,6 +296,7 @@ function reqListener4() {
     b.append(d);
     b.append(document.createElement("br"));
   }
+  //document.getElementById("md").click();
 }
 
 //

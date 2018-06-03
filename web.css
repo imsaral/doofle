@@ -1,6 +1,21 @@
 input[type="text"]:focus {
   width: 50%;
 }
+.toview.link {
+  color: blue;
+}
+
+.toview.hover {
+  color: red;
+}
+
+.toview.active {
+  color: green;
+}
+
+.toview.visited {
+  color: pink;
+}
 .search-bar[type="text"] {
   float: none;
   position: absolute;
@@ -53,21 +68,26 @@ input[type="text"]:focus {
   font-size: 24px;
 }
 .ansBody {
+  display: inline-block;
+  width: 90%;
   padding: 10px;
   border: 1px solid black;
   font-size: 16px;
 }
 .recipe {
+  display: inline-block;
   width: 60%;
   float: left;
 }
 .image {
+  display: inline-block;
   width: 30%;
   float: right;
   margin-top: 10px;
   margin-right: 10px;
 }
 .pic {
+  display: inline-block;
   width: 200px;
   height: 200px;
 }
