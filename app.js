@@ -14,6 +14,7 @@ var cat = "";
 var inp = document.getElementById("qw");
 inp.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
+    document.getElementById("mu").click();
     cat = "" + document.getElementById("category").value;
     console.log(cat);
     var parent = document.getElementById("content");
@@ -227,6 +228,7 @@ function reqListener3() {
     b.append(d);
     b.append(document.createElement("br"));
   }
+  document.getElementById("md").click();
 }
 function reqListener4() {
   var obj = JSON.parse(this.responseText);
@@ -303,7 +305,7 @@ function reqListener4() {
     b.append(d);
     b.append(document.createElement("br"));
   }
-  //document.getElementById("md").click();
+  document.getElementById("md").click();
 }
 
 //
