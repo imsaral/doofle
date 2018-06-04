@@ -47,7 +47,7 @@ input[type="text"]:focus {
   padding: 10px 10px 10px 30px;
   margin-right: 50px;
   background: white;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 #content {
   height: 1000px;
@@ -58,7 +58,7 @@ input[type="text"]:focus {
   margin-left: 50px;
   /*margin-right: 80px;*/
   background: white;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 #alpha {
   width: 100%;

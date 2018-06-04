@@ -52,7 +52,7 @@ function search() {
     oReq.addEventListener("load", reqListener);
     oReq.open(
       "POST",
-      `https://apis.paralleldots.com/v3/keywords?api_key=c3QDGriQp9S4DXDVWDqf7wvqazd0B5xHWWCQfEfgCc4&text=${str}`
+      `https://apis.paralleldots.com/v3/keywords?api_key=YOUR-API-KEY&text=${str}`
     );
     oReq.send();
   } else {
@@ -61,21 +61,21 @@ function search() {
     oReq.addEventListener("load", reqListener4);
     oReq.open(
       "GET",
-      `https://api.edamam.com/search?q=${s}&app_id=07ebeb3d&app_key=0a846267a56826b3ea7b5c98277011e4`
+      `https://api.edamam.com/search?q=${s}&app_id=07ebeb3d&app_key=YOUR-API-KEY`
     );
     oReq.send();
     var str1 = "how+to+cook+" + s;
     var uoReq = new XMLHttpRequest();
     uoReq.open(
       "GET",
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${str1}&maxResults=10&type=video&videoCaption=closedCaption&key=AIzaSyBgRBtfg3im4_6a3XGq3r4UcLJ0bweU6-4`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${str1}&maxResults=10&type=video&videoCaption=closedCaption&key=YOUR-API-KEY`
     );
     console.log(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${str1}&maxResults=10&type=video&videoCaption=closedCaption&key=AIzaSyBgRBtfg3im4_6a3XGq3r4UcLJ0bweU6-4`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${str1}&maxResults=10&type=video&videoCaption=closedCaption&key=YOUR-API-KEY`
     );
     // uoReq.open(
     //   "GET",
-    //   `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${str1}&maxResults=10&type=video&key=AIzaSyBgRBtfg3im4_6a3XGq3r4UcLJ0bweU6-4`
+    //   `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${str1}&maxResults=10&type=video&key=YOUR-API-KEY`
     // );
     var z = uoReq.addEventListener("load", ureqListener);
     uoReq.send();
@@ -95,7 +95,7 @@ function reqListener() {
   var uoReq = new XMLHttpRequest();
   uoReq.open(
     "GET",
-    `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${ustr}&maxResults=10&type=video&videoCaption=closedCaption&key=AIzaSyBgRBtfg3im4_6a3XGq3r4UcLJ0bweU6-4`
+    `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${ustr}&maxResults=10&type=video&videoCaption=closedCaption&key=YOUR-API-KEY`
   );
   var z = uoReq.addEventListener("load", ureqListener);
   uoReq.send();
