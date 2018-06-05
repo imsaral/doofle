@@ -41,8 +41,6 @@ inp.addEventListener("keyup", function(event) {
   }
 });
 function search() {
-  document.getElementById("pagebody").appendChild(document.createElement("br"));
-  document.getElementById("pagebody").appendChild(document.createElement("br"));
   str = document.getElementById("qw").value;
   console.log(str);
   console.log(cat);
